@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classList from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -41,29 +41,13 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover':  {
-        backgroundColor: 'lightgreen',
-        color: 'black',
-      }
-    }
 
 
     // This is checked everytime the DOM is updated
     let persons = null;
-
+    let btnClass = '';
     if (this.state.showPersons){ // Can use if statement outside of return because its not jsx
-      style.backgroundColor = "red";
-      style[':hover'] = {
-        backgroundColor: 'pink',
-        color: 'white',
-      } 
+    
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
@@ -79,15 +63,17 @@ class App extends Component {
           })}
         </div> 
       )
+
+      btnClass = classList.Red;
     }
 
     const classes = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      classes.push( classList.red );
     } 
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      classes.push( classList.bold );
     }
     return (
     
@@ -95,11 +81,12 @@ class App extends Component {
 
       // The bind method is a better way then the Arrow function
       
-      <div className="App"> 
+      <div className={classList.App}> 
         <h1>Hello, World</h1>
         <button 
-          style ={style}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          onClick={this.togglePersonsHandler}
+          className={btnClass}
+          >Toggle Persons</button>
           
         {persons}
         {/* This is the prefered way to render conditional content */}
